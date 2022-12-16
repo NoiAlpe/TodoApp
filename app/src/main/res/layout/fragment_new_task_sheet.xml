@@ -52,8 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Select Time"
-        android:backgroundTint="?attr/colorOnSecondary"
-        android:textColor="?colorOnPrimary"
 
         />
 
@@ -62,9 +60,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save"
-
+        android:backgroundTint="?attr/colorSecondary"
+        android:textColor="?colorOnPrimary"
         />
-
-
 
 </LinearLayout>
