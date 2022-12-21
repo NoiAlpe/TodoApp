@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.databinding.FragmentNewTaskSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -78,14 +79,16 @@ class NewTaskSheet (var taskItem: TaskItem?) : BottomSheetDialogFragment() {
         val desc = binding.tiDesc.text.toString()
         val dueTimeString = if (dueTime == null) null else TaskItem.timeFormatter.format(dueTime)
 
-        if (taskItem == null) {
+        if (taskItem == null && (name.isNotEmpty() || desc.isNotEmpty())) {
             val newTask = TaskItem(name, desc, dueTimeString ,null)
             taskViewModel.addTaskItem(newTask)
-        } else {
+        } else if (name.isNotEmpty() || desc.isNotEmpty()) {
             taskItem!!.name = name
             taskItem!!.desc = desc
             taskItem!!.dueTimeString = dueTimeString
             taskViewModel.updateTaskItem(taskItem!!)
+        } else {
+            Toast.makeText(context, "Both Fields are empty", Toast.LENGTH_SHORT).show()
         }
 
         binding.tiName.setText("")
